@@ -3,6 +3,8 @@ package com.dc.core;
 import com.dc.models.Offers;
 import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.binder.DigesterLoader;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import java.io.*;
@@ -18,6 +20,18 @@ public class Parser {
         DigesterLoader digesterLoader = DigesterLoader.newLoader(new OffersModule());
         this.digester = digesterLoader.newDigester();
         this.fis = new FileInputStream(uri);
+
+        // ignore dtd validation
+        this.digester.setEntityResolver(new EntityResolver() {
+            @Override
+            public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
+                if (systemId.contains("shops.dtd")) {
+                    return new InputSource(new StringReader(""));
+                } else {
+                    return null;
+                }
+            }
+        });
     }
 
     public void init(String uri, Double price) throws FileNotFoundException {
