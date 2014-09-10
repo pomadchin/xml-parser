@@ -36,5 +36,7 @@ public class ParserTest {
         Assert.assertEquals("Incorrect filtered result", ids, offers.getOffersPriceFiltered());
 
         System.out.println(parser.getOffers().getOffersPriceFiltered().toString());
+
+        parser.clear();
     }
 }

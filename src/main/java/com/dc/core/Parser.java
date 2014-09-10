@@ -5,26 +5,56 @@ import org.apache.commons.digester3.Digester;
 import org.apache.commons.digester3.binder.DigesterLoader;
 import org.xml.sax.SAXException;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 public class Parser {
     private Offers offers;
     private Digester digester;
     private FileInputStream fis;
+    private PrintWriter pw; // output file writer
+
+    // init to prevent code copy
+    private void privateInit(String uri) throws FileNotFoundException {
+        DigesterLoader digesterLoader = DigesterLoader.newLoader(new OffersModule());
+        this.digester = digesterLoader.newDigester();
+        this.fis = new FileInputStream(uri);
+    }
 
     public void init(String uri, Double price) throws FileNotFoundException {
-        DigesterLoader digesterLoader = DigesterLoader.newLoader(new OffersModule());
-        digester = digesterLoader.newDigester();
-        digester.push(new Offers(price));
+        privateInit(uri);
 
-        this.fis = new FileInputStream(uri);
+        this.digester.push(new Offers(price));
+    }
+
+    public void init(String uri, Double price, String out) throws FileNotFoundException {
+        privateInit(uri);
+
+        this.pw = new PrintWriter(new File(out));
+        this.digester.push(new Offers(price, pw));
+    }
+
+    public void init(String uri, Double price, String out, Integer batch) throws FileNotFoundException {
+        privateInit(uri);
+
+        this.pw = new PrintWriter(new File(out));
+        this.digester.push(new Offers(price, pw, batch));
     }
 
     public void run() throws IOException, SAXException {
         if(fis != null)
             offers = digester.parse(fis);
+    }
+
+    public void clear() {
+        if(digester != null)
+            digester.clear();
+
+        if(offers != null)
+            offers.clear();
+    }
+
+    public Boolean isWritable() {
+        return pw != null;
     }
 
     public Offers getOffers() {
