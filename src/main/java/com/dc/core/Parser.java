@@ -34,6 +34,17 @@ public class Parser {
         });
     }
 
+    public void init(String[] args) throws FileNotFoundException {
+        Integer argsLength = args.length;
+
+        if(argsLength > 1)
+            init(args[0], Double.parseDouble(args[1]));
+        if(argsLength > 2)
+            init(args[0], Double.parseDouble(args[1]), args[2]);
+        if(argsLength > 3)
+            init(args[0], Double.parseDouble(args[1]), args[2], Integer.parseInt(args[3]));
+    }
+
     public void init(String uri, Double price) throws FileNotFoundException {
         privateInit(uri);
 

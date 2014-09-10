@@ -15,9 +15,7 @@ public class App  {
 
     public static void main(String[] args) {
 
-        Integer argsLength = args.length;
-
-        if(argsLength < 2) {
+        if(args.length < 2) {
             System.out.println("0: Error occurred: check arguments passed.");
             return;
         }
@@ -26,13 +24,7 @@ public class App  {
         Parser parser = (Parser) context.getBean("parser");
 
         try {
-            if(argsLength > 1)
-                parser.init(args[0], Double.parseDouble(args[1]));
-            if(argsLength > 2)
-                parser.init(args[0], Double.parseDouble(args[1]), args[2]);
-            if(argsLength > 3)
-                parser.init(args[0], Double.parseDouble(args[1]), args[2], Integer.parseInt(args[3]));
-
+            parser.init(args);
             parser.run();
             System.out.println("Yml path: " + args[0]);
             if(!parser.isWritable()) {
