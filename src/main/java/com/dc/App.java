@@ -18,6 +18,8 @@ public class App  {
         try {
             parser.init(args[0], Double.parseDouble(args[1]));
             parser.run();
+            System.out.println("Yml path: " + args[0]);
+            System.out.println("Offer ids with price > " + args[1] + ":");
             System.out.println(parser.getOffers().getOffersPriceFiltered().toString());
         } catch( Exception exc ) {
             //exc.printStackTrace();
