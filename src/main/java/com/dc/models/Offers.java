@@ -6,6 +6,7 @@ import java.util.List;
 
 /*
  * Offers class
+ * stores offers and filtered ids
  */
 public class Offers {
     private List<Offer> offers = new ArrayList<Offer>();
@@ -27,6 +28,7 @@ public class Offers {
         return Collections.unmodifiableList(offers);
     }
 
+    // TODO: mem free here (~send transaction, clean digester)
     public void addOffer(Offer offer) {
         offers.add(offer);
         if(price != null)

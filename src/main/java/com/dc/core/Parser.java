@@ -14,7 +14,7 @@ public class Parser {
     private Digester digester;
     private FileInputStream fis;
 
-    public Parser(String uri, Double price) throws FileNotFoundException {
+    public void init(String uri, Double price) throws FileNotFoundException {
         DigesterLoader digesterLoader = DigesterLoader.newLoader(new OffersModule());
         digester = digesterLoader.newDigester();
         digester.push(new Offers(price));

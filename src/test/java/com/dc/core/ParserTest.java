@@ -16,7 +16,8 @@ public class ParserTest {
 
     @BeforeClass
     public static void setup() throws FileNotFoundException {
-        parser = new Parser("xml/yml.xml", 80500.00);
+        parser = new Parser();
+        parser.init("xml/yml.xml", 80500.00);
     }
 
     @Test

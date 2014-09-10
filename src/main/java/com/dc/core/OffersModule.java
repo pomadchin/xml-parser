@@ -3,6 +3,9 @@ package com.dc.core;
 import com.dc.models.Offer;
 import org.apache.commons.digester3.binder.AbstractRulesModule;
 
+/*
+ * Offers parser rules (slow - reflection)
+ */
 public class OffersModule extends AbstractRulesModule {
 
     @Override
