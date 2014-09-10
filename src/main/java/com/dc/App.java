@@ -34,7 +34,7 @@ public class App  {
                 System.out.println("OfferIds path: " + args[2]);
             }
         } catch( Exception exc ) {
-            exc.printStackTrace();
+            // exc.printStackTrace();
             System.out.println("1: Error occurred: check arguments passed.");
         } finally {
             parser.clear();
