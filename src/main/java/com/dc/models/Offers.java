@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class Offers {
     private List<Offer> offers = new ArrayList<Offer>();
-    private List<String> offersPriceFiltered = new ArrayList<String>();
     private Double price;
     private PrintWriter pw; // output file writer
     private Integer batch = 80000;
@@ -44,22 +43,16 @@ public class Offers {
 
     // if pw not null writes file
     public void addOffer(Offer offer) {
-        offers.add(offer);
         if(price != null)
             if(offer.getPrice() > price)
-                offersPriceFiltered.add(offer.getId());
+                offers.add(offer);
 
         if(isWritable()) {
-            if(offersPriceFiltered.size() > 0 && (offersPriceFiltered.size() % batch == 0)) {
-                pw.write(offersPriceFiltered.toString() + "\n");
+            if(offers.size() > 0 && (offers.size() % batch == 0)) {
+                pw.write(offers.toString() + "\n");
                 offers.clear();
-                offersPriceFiltered.clear();
             }
         }
-    }
-
-    public List<String> getOffersPriceFiltered() {
-        return Collections.unmodifiableList(offersPriceFiltered);
     }
 
     public Boolean isWritable() {
@@ -68,22 +61,19 @@ public class Offers {
 
     public void clear() {
         if(isWritable()) {
-            if(offersPriceFiltered.size() > 0)
-                pw.write(offersPriceFiltered.toString() + "\n");
+            if(offers.size() > 0)
+                pw.write(offers.toString() + "\n");
 
             pw.close();
         }
 
         offers.clear();
-        offersPriceFiltered.clear();
     }
 
     @Override
     public String toString() {
         return "Offers{" +
                 "offers=" + offers +
-                ", offersPriceFiltered=" + offersPriceFiltered +
-                ", price=" + price +
                 '}';
     }
 }

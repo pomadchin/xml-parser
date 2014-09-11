@@ -29,7 +29,7 @@ public class App  {
             System.out.println("Yml path: " + args[0]);
             if(!parser.isWritable()) {
                 System.out.println("Offer ids with price > " + args[1] + ":");
-                System.out.println(parser.getOffers().getOffersPriceFiltered().toString());
+                System.out.println(parser.getOffers().toString());
             } else {
                 System.out.println("OfferIds path: " + args[2]);
             }

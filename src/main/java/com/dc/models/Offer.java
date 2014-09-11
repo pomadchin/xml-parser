@@ -108,18 +108,6 @@ public class Offer {
 
     @Override
     public String toString() {
-        return "Offer{" +
-                "id='" + id + '\'' +
-                ", available=" + available +
-                ", url='" + url + '\'' +
-                ", price=" + price +
-                ", currencyId='" + currencyId + '\'' +
-                ", categoryId='" + categoryId + '\'' +
-                ", picture='" + picture + '\'' +
-                ", delivery=" + delivery +
-                ", name='" + name + '\'' +
-                ", vendor='" + vendor + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return id;
     }
 }
